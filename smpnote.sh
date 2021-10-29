@@ -26,7 +26,7 @@ usage() { echo "Usage: $0 [title] [(optional) some/dir [!! dont include a leadin
 # Initial Set up complete
 title=${1}
 folder_struct_y="$(date +'%Y/')" # this is a structure to save the files in a folder format of /YYYY/MM/D.md
-folder_struct_m="$(date + '%m/')"
+folder_struct_m="$(date +'%m/')"
 file_name="$(date +'%d').md"
 timestamp="$(date +'%r')"
 working_dir=$(pwd)
@@ -34,12 +34,18 @@ working_dir=$(pwd)
 create_file() { 
 	if [ ! -f "$file_name" ];
 	       	then
-	       		touch "$file_name"
-
-			# Finally open with VIM
-			editor "$file_name"
+	       		# create file
+			touch "$file_name"
        		else
+
 	fi
+
+	# append timestamp and title to file
+	printf "# %s.\n" $title >> "$file_name"
+	printf "\t %s\n" $timestamp >> "$file_name"
+
+	# Finally open with VIM
+	editor "$file_name"
 }
 
 if [ -z "${2+x}" ];
