@@ -8,28 +8,96 @@
 # Passing input into the script below using flags,
 # there are 2 flags to concentrate on:
 # -t : title
-# -d : directory (can be dynamic or a full path)
+# -d : directory (dynamic path (from current working directory)
 # if -d isnt specified then use the current dir
+ 
+# e.g. smpnote title some/directory/
 
-# e.g. smpnote -t 'New note' -d 'some/dir'
-# or 
-# e.g. smpnote -t 'New note'
+# Change this to your editor of choice
+editor() { vim $1 }
 
-term="vim"
 
-while getopts t:d: flag
-do
-	case "${flag}" in
-		t) title=&{OPTARG};;
-		d) directory=&{OPTARG};;
-	esac
-done
+# editor="emacs"
+# editor="typora"
 
-# Variables can be accessed using $title and $directory
-# Store the current dir into a variable
+# Simple usage function
+usage() { echo "Usage: $0 [title] [(optional) some/dir [!! dont include a leading '/' !!] ] ]" 1>&2; exit 1; }
 
-pwd=$(pwd)
-directory="$pwd $directory"
+# Initial Set up complete
+title=${1}
+folder_struct_y="$(date +'%Y/')" # this is a structure to save the files in a folder format of /YYYY/MM/D.md
+folder_struct_m="$(date + '%m/')"
+file_name="$(date +'%d').md"
+timestamp="$(date +'%r')"
+working_dir=$(pwd)
 
-echo "$directory"
-echo "$vim"
+create_file() { 
+	if [ ! -f "$file_name" ];
+	       	then
+	       		touch "$file_name"
+
+			# Finally open with VIM
+			editor "$file_name"
+       		else
+	fi
+}
+
+if [ -z "${2+x}" ];
+then # default directory
+	dir="~/smp-note/";
+	# create folder in that directory
+	# first check if it exists if not then create it 
+	if [ ! -d "$dir" ]; then
+		mkdir "$dir$folder_struct_y$folder_struct_m" && cd "$dir$folder_struct_y$folder_struct_m" # ~/smp-note/YYYY/MM/
+	       	# file creation
+		create_file
+
+		# now we write the title and timestamp into the file using
+	else
+		# does exist so check if child folders exist
+		# if they dont exist then create them
+		# if they do exist then just create a file in that dir
+		if [ ! -d "$dir$folder_struct_y"]; then 
+			cd "$dir"
+			mkdir "$folder_struct_y"
+			cd "$folder_struct_y"
+			if [ ! -d "$folder_struct_m" ]; then
+				# create dir
+				mkdir "$folder_struct_m"
+				cd "$folder_struct_m"
+				create_file
+			else
+				# exists so no need to create just cd into it.
+				cd "$folder_struct_m"
+				# FILE CHECKING == If exists then append title and timestamp into it, otherwise create and do the same
+				create_file
+			fi
+
+		else
+			# exists so cd into it and check if folderstructm exists
+			cd "$folder_struct_y"
+			if [ ! -d "$folder_struct_m"]; then
+				# create dir
+				mkdir "$folder_struct_m"
+				cd "$folder_struct_m"
+				
+				# FILE
+				create_file
+			else
+				# exists so cd into it
+				cd "$folder_struct_m"
+				
+				# FILE CHECKING == if exists then append title and timestamp into it, otherwise create and do the same
+				create_file
+			fi
+		
+		fi
+
+
+	fi	
+	
+else # custom directory
+	dir="$working_dir$2";
+fi
+
+
