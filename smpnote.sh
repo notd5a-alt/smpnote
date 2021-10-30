@@ -26,8 +26,8 @@ while getopts :hp opt; do
 	case ${opt} in
 		h) helpp; exit 0;;
 		p) parse="true";;
-		:) echo "Missing argument -${OPTARG}"; exit 1;;
-		\?) echo "Unknown option -${OPTARG}"; exit 1;;
+		:) echo "Missing argument -${OPTARG}"; helpp; exit 1;;
+		\?) echo "Unknown option -${OPTARG}"; helpp; exit 1;;
 	esac
 done
 
