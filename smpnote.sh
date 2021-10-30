@@ -40,7 +40,7 @@ create_file() {
 
 	# append timestamp and title to file
 	printf "# %s.\n" $title >> "$file_name"
-	printf "## %s \n\n" $timestamp >> "$file_name"
+	printf "## %s %s \n\n" $timestamp >> "$file_name"
 
 	# Finally open with VIM
 	editor "$dir$folder_struct_y$folder_struct_m$file_name"
