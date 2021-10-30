@@ -57,8 +57,8 @@ timestamp="$(date +'%r')"
 full_path="$folder_struct_y$folder_struct_m"
 
 parser() { 
-	# pip3 install markdown
-	# pip install markdown
+	# pip3 install mistletoe
+	# pip install mistletoe
 
 	# make the directory that the python3 script will use
 	mkdir "${file_path%.*}"
