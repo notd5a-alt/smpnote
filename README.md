@@ -77,8 +77,8 @@ smpnote -p full/path/to/some/dir/file.md 	# to use the mistletoe parser on the f
 > FYI: Images need to be exported into the corresponding folders, minimal work but tedious nonetheless. Will fix soon.
 
 ## Planned upcoming features
-- [] Improvements and bug fixes for the current script
-- [] Powershell version (for Windows)
-- [] Support for themes
+- Improvements and bug fixes for the current script
+- Powershell version (for Windows)
+- Support for themes
 
 > Feel free to contribute or fork the repository to make your own changes to the script.
