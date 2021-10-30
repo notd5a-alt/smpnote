@@ -9,6 +9,8 @@ The script automatically creates a directory `/smp-note/` in your home directory
 Every day has its own file and every entry is automatically timestamped. The files of course are in markdown, but you can change the file format by editing the script just a bit. You can specify a custom directory if you want to store the markdown file somewhere else but i havent added a way to set a permanent custom directory for the script.
 
 # Setup
+
+## Linux
 You probably want to use the script globally so first thing you are probably going to want to do is add the script to your path
 Now keep note of wherever you installed it just go into your `.bashrc` or `.zshrc` depending on which shell your using and add the following:
 ```sh
@@ -29,6 +31,15 @@ On line 17 you can also change the following to change which editor you want to 
 11 editor() { vim $1; }
 ```
 I like VIM so i use it by default but you can use `nano` or `emacs` or even GUI applications that can launch through the terminal like Visual Studio `code`.
+
+## MacOS
+I dont have a Mac so i cant test this really but if someone can please let me know if it works, or if it isnt
+
+## Windows Using WSL
+Works the same as the Linux section. Just clone repo, add to path and alias and you'll be able to use the script
+
+## Windows
+> Unknown for now
 
 ## Example usage
 ```sh
