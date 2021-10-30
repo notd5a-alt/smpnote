@@ -4,14 +4,34 @@ import sys
 import getopt
 import markdown
 
+
+preq = """
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+"""
+
+subq = """
+
+
+</body>
+</html>
+"""
+
 # Function to convert markdown to html using markdown 
 def converter(infile, outfile):
+    # flexible adding of markdown->html into an existing file
     with open(infile, 'r') as f:
         text = f.read()
         html = markdown.markdown(text)
-
     with open(outfile, 'w') as f:
+        f.write(preq)
         f.write(html)
+        f.write(subq)
 
 def main(argv) {
     infile=''

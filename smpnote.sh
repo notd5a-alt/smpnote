@@ -49,7 +49,12 @@ file_name="$(date +'%d').md"
 timestamp="$(date +'%r')"
 full_path="$folder_struct_y$folder_struct_m"
 
-parser() { python md2html.py -i "$file_path" -o "$output_file" }
+parser() { python md2html.py -i "$file_path" -o "$output_file"; }
+# parser() { python3 md2html.py -i "$file_path" -o "$output_file"; }
+# or we can be really efficient and use the markdown tool to do the following
+# parser() { python/python3 -m markdown "$file_path" -f "$output_file"; }
+# that way we can do away with my other script and tada, we have a command line markdown parser just using a simple command
+# however, this way we wont have a styled html document, instead we have a plain html document 
 
 create_file() { 
 	if [ ! -f "$file_name" ];
