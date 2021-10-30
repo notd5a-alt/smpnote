@@ -2,7 +2,6 @@
 
 import sys
 import getopt
-import markdown
 
 # HTML file beginning
 preq = """
@@ -29,15 +28,16 @@ style = """
 
 """
 
+import mistletoe
+
 # Function to convert markdown to html using markdown 
 def converter(infile, outfile):
     # flexible adding of markdown->html into an existing file
     with open(infile, 'r') as f:
-        text = f.read()
-        html = markdown.markdown(text)
+        rendered = mistletoe.markdown(f)
     with open(outfile, 'w') as f:
         f.write(preq)
-        f.write(html)
+        f.write(rendered)
         f.write(subq)
 
 def create_stylesheet(infile, outfile, stylefile):

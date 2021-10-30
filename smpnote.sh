@@ -61,6 +61,12 @@ full_path="$folder_struct_y$folder_struct_m"
 parser() { 
 	# pip3 install markdown
 	# pip install markdown
+
+	# make the directory that the python3 script will use
+	mkdir "${file_path%.*}"
+	mkdir "${html_out_dir}"
+
+	# FINALLY run python script
 	python3 ./md2html.py -i "$file_path" -o "$output_file" -s "$style_file"
 }
 # parser() { python3 md2html.py -i "$file_path" -o "$output_file"; }
