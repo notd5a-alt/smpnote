@@ -40,6 +40,11 @@ img {
     width: 90%;
 }
 
+a {
+    font-weight: 800;
+    color: #08D9D6;
+}
+
 blockquote {
     background: #2C394B;
     border-left: 10px solid #ccc;
