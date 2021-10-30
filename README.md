@@ -26,18 +26,23 @@ cp /some/dir/smpnote.sh /usr/local/bin
 On line 17 you can also change the following to change which editor you want to use:
 ```sh
 10 # Change this to your editor of choice
-11 editor() { vim $1 }
+11 editor() { vim $1; }
 ```
 I like VIM so i use it by default but you can use `nano` or `emacs` or even GUI applications that can launch through the terminal like Visual Studio `code`.
 
 ## Example usage
-`smpnote <title>`
-`smpnote <title> <custom-directory>`
-`smpnote 'My first entry'`
+```sh
+smpnote <title>
+smpnote <title> <custom-directory>
+smpnote 'My first entry'
+smpnote 'My first entry' /some/dir
+```
+
+> FYI: My code isnt checking for any malicios or incorrect input, so use at your own risk or modify the script to do so
 
 ## Planned upcoming features
-Powershell version (for Windows)
-Markdown to HTML parser. ( Might be made in rust. )
+- Improvements and bug fixes for the current script
+- Powershell version (for Windows)
+- Markdown to HTML parser. ( Might be made in rust. )
 
-
-	Feel free to contribute or fork the repository to make your own changes to the script.
+> Feel free to contribute or fork the repository to make your own changes to the script.
