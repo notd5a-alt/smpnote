@@ -9,10 +9,10 @@
 
 # Change this to your editor of choice
 editor() { vim $1; }
-
-
-# editor="emacs"
-# editor="typora"
+# editor() { emacs $1; }
+# editor() { nano $1; }
+# editor() { typora $1; }
+# editor() { code $1; }
 
 # Simple usage function
 
