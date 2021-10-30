@@ -5,7 +5,10 @@
 # Very useful in writing notes on a daily basis from just the command line
 # Add this script to your $PATH if you want to use it everywhere.
  
-# e.g. smpnote title some/directory/
+# e.g. smpnote 'New entry'
+
+# Simple install markdown for python if not already installed
+pip3 install markdown
 
 # Change this to your editor of choice
 editor() { vim $1; }
@@ -14,20 +17,18 @@ editor() { vim $1; }
 # editor() { typora $1; }
 # editor() { code $1; }
 
-parser() { python md2html.py $1; }
-# parser() { python3 md2html.py $1; }
-
 # A simple helper function for -h flag
 helpp() { echo "Usage: $0 <-h optional> <-p optional> <title>"; }
 
 # using getopts to get flags for help or parse i.e. -h -p
 parse=false
 title=""
+file_path=""
 
 while getopts :hp opt; do
 	case ${opt} in
 		h) helpp; exit 0;;
-		p) parse=true; file_path="${OPTARG}";; # set parse to true and get file_path
+		p) parse=true;; # set parse to true and get file_path
 		:) echo "Missing argument -${OPTARG}"; exit 1;;
 		\?) echo "Unknown option -${OPTARG}"; exit 1;;
 	esac
@@ -36,15 +37,19 @@ done
 #remove parsed options from positional params
 shift $(( OPTIND - 1 ))
 
-# now $1==title if specified, if not then title="" by default
+# now $2==title if specified, if not then title="" by default
 # Initial setup complete
 
-title=${1}
+file_path="${1}"
+output_file="${1%.*}.html"
+title="${2}"
 folder_struct_y="$(date +'%Y/')" # this is a structure to save the files in a folder format of /YYYY/MM/D.md
 folder_struct_m="$(date +'%m/')"
 file_name="$(date +'%d').md"
 timestamp="$(date +'%r')"
 full_path="$folder_struct_y$folder_struct_m"
+
+parser() { python md2html.py -i "$file_path" -o "$output_file" }
 
 create_file() { 
 	if [ ! -f "$file_name" ];
