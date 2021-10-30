@@ -4,12 +4,6 @@
 # markdown that you set below, 
 # Very useful in writing notes on a daily basis from just the command line
 # Add this script to your $PATH if you want to use it everywhere.
-
-# Passing input into the script below using flags,
-# there are 2 flags to concentrate on:
-# -t : title
-# -d : directory (dynamic path (from current working directory)
-# if -d isnt specified then use the current dir
  
 # e.g. smpnote title some/directory/
 
@@ -29,21 +23,22 @@ folder_struct_m="$(date +'%m/')"
 file_name="$(date +'%d').md"
 timestamp="$(date +'%r')"
 working_dir=$(pwd)
+full_path="$folder_struct_y$folder_struct_m"
 
 create_file() { 
 	if [ ! -f "$file_name" ];
 	       	then
 	       		# create file
-			cd "$dir$folder_struct_y$folder_struct_m"
+			cd "$dir$full_path"
 			touch "$file_name"
 	fi
 
 	# append timestamp and title to file
-	printf "# %s.\n" $title >> "$file_name"
-	printf "## %s %s \n\n" $timestamp >> "$file_name"
+	printf "# %s.\n" "$title" >> "$file_name"
+	printf "## %s %s \n\n" "$timestamp" >> "$file_name"
 
 	# Finally open with VIM
-	editor "$dir$folder_struct_y$folder_struct_m$file_name"
+	editor "$dir$full_path$file_name"
 }
 
 if [ -z "${2+x}" ];
@@ -54,9 +49,9 @@ if [ -z "${2+x}" ];
 	# first check if it exists if not then create it 
 	if [ ! -d "$dir" ]; then
 		mkdir "$dir"
-	       	mkdir "$dir$folder_struct_y"
-		mkdir "$dir$folder_struct_y$folder_struct_m"
-		cd "$dir$folder_struct_y$folder_struct_m" # ~/smp-note/YYYY/MM/
+	    mkdir "$dir$folder_struct_y"
+		mkdir "$dir$full_path"
+		cd "$dir$full_path" # ~/smp-note/YYYY/MM/
 	       	
 		# file creation
 		create_file
@@ -66,7 +61,8 @@ if [ -z "${2+x}" ];
 		# does exist so check if child folders exist
 		# if they dont exist then create them
 		# if they do exist then just create a file in that dir
-		if [ ! -d "$dir$folder_struct_y"]; 
+		cd "$dir"
+		if [ ! -d "$folder_struct_y" ]; 
 		then 
 			cd "$dir"
 			mkdir "$folder_struct_y"
@@ -85,8 +81,9 @@ if [ -z "${2+x}" ];
 			fi
 		else
 			# exists so cd into it and check if folderstructm exists
+			cd "$dir"
 			cd "$folder_struct_y"
-			if [ ! -d "$folder_struct_m"]; 
+			if [ ! -d "$folder_struct_m" ]; 
 				then
 					# create dir
 					mkdir "$folder_struct_m"
