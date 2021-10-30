@@ -33,6 +33,13 @@ html {
     background-color: #252A34;
 }
 
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
 blockquote {
     background: #2C394B;
     border-left: 10px solid #ccc;

@@ -74,6 +74,7 @@ smpnote -p full/path/to/some/dir/file.md 	# to use the mistletoe parser on the f
 ```
 
 > FYI: My code isnt checking for any malicios or incorrect input, so use at your own risk or modify the script to do so
+> FYI: Images need to be exported into the corresponding folders, minimal work but tedious nonetheless. Will fix soon.
 
 ## Planned upcoming features
 - [] Improvements and bug fixes for the current script
