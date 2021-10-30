@@ -40,8 +40,6 @@ shift "$((OPTIND-1))"
 if [ "$parse" = "true" ]; then
 	file_path="${1}"
 	title="${2}"
-	echo $file_path
-	echo $title
 else
 	title="${1}"
 fi
