@@ -14,15 +14,36 @@ editor() { vim $1; }
 # editor() { typora $1; }
 # editor() { code $1; }
 
-# Simple usage function
+parser() { python md2html.py $1; }
+# parser() { python3 md2html.py $1; }
 
-# Initial Set up complete
+# A simple helper function for -h flag
+helpp() { echo "Usage: $0 <-h optional> <-p optional> <title>"; }
+
+# using getopts to get flags for help or parse i.e. -h -p
+parse=false
+title=""
+
+while getopts :hp opt; do
+	case ${opt} in
+		h) helpp; exit 0;;
+		p) parse=true; file_path="${OPTARG}";; # set parse to true and get file_path
+		:) echo "Missing argument -${OPTARG}"; exit 1;;
+		\?) echo "Unknown option -${OPTARG}"; exit 1;;
+	esac
+done
+
+#remove parsed options from positional params
+shift $(( OPTIND - 1 ))
+
+# now $1==title if specified, if not then title="" by default
+# Initial setup complete
+
 title=${1}
 folder_struct_y="$(date +'%Y/')" # this is a structure to save the files in a folder format of /YYYY/MM/D.md
 folder_struct_m="$(date +'%m/')"
 file_name="$(date +'%d').md"
 timestamp="$(date +'%r')"
-working_dir=$(pwd)
 full_path="$folder_struct_y$folder_struct_m"
 
 create_file() { 
@@ -41,7 +62,7 @@ create_file() {
 	editor "$dir$full_path$file_name"
 }
 
-if [ -z "${2+x}" ];
+if [ "$parse"="false" ];
 	then 
 	# default directory
 	dir="$HOME/smp-note/";
@@ -100,6 +121,6 @@ if [ -z "${2+x}" ];
 			fi
 		fi
 	fi	
-	else # custom directory
-		dir="$working_dir$2";
+	else # parsing a file given the file path, parser leads to a python script in the same location (md2html.py) that converts the file to html
+		parser "$file_path"
 fi

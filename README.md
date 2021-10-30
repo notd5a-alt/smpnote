@@ -1,12 +1,12 @@
 # Simple Note CLI (smpnote)
-	A simple note taking bash script.
+	A simple note taking bash script for Linux.
 
 # About
 Ever wanted a simple and easy way to make timestamped notes through the command line? Then just use smp-note.
 smp-note is a simple bash script that automates my own personal markdown note taking on a day to day basis.
 
 The script automatically creates a directory `/smp-note/` in your home directory and anytime you make a new note the script stores that note in the following file structure: `~/smp-note/YYYY/MM/DD.md`
-Every day has its own file and every entry is automatically timestamped. The files of course are in markdown, but you can change the file format by editing the script just a bit. You can specify a custom directory if you want to store the markdown file somewhere else but i havent added a way to set a permanent custom directory for the script.
+Every day has its own file and every entry is automatically timestamped. The files of course are in markdown, but you can change the file format by editing the script just a bit.
 
 # Setup
 
@@ -36,17 +36,16 @@ I like VIM so i use it by default but you can use `nano` or `emacs` or even GUI 
 I dont have a Mac so i cant test this really but if someone can please let me know if it works, or if it isnt
 
 ## Windows Using WSL
-Works the same as the Linux section. Just clone repo, add to path and alias and you'll be able to use the script
-
-## Windows
-> Unknown for now
+Works the same as the Linux section. Just clone repo, add to path and alias and you'll be able to use the script.
 
 ## Example usage
 ```sh
+smpnote -h
 smpnote <title>
-smpnote <title> <custom-directory>
+smpnote -p <title>
+smpnote -p <title>
 smpnote 'My first entry'
-smpnote 'My first entry' /some/dir
+smpnote -p 'My first entry'
 ```
 
 30.md
