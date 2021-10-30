@@ -38,6 +38,12 @@ smpnote 'My first entry'
 smpnote 'My first entry' /some/dir
 ```
 
+30.md
+```md
+# My first entry
+## 11:55 PM
+```
+
 > FYI: My code isnt checking for any malicios or incorrect input, so use at your own risk or modify the script to do so
 
 ## Planned upcoming features
