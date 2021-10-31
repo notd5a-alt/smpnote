@@ -61,8 +61,10 @@ parser() {
 	# pip install mistletoe
 
 	# make the directory that the python3 script will use
-	mkdir "${file_path%.*}"
-	mkdir "${html_out_dir}"
+	sudo mkdir -p "${html_out_dir}"
+  find -type f -name \*.png -exec install -D {} /"${html_out_dir}"{} \;
+  find -type f -name \*.jpg -exec install -D {} /"${html_out_dir}"{} \;
+  find -type f -name \*.svg -exec install -D {} /"${html_out_dir}"{} \;
 
 	# FINALLY run python script
 	python3 ./md2html.py -i "$file_path" -o "$output_file" -s "$style_file"
@@ -95,9 +97,7 @@ if [ "$parse" = "false" ]; then
 	# create folder in that directory
 	# first check if it exists if not then create it 
 	if [ ! -d "$dir" ]; then
-		mkdir "$dir"
-	    	mkdir "$dir$folder_struct_y"
-		mkdir "$dir$full_path"
+		sudo mkdir -p "$dir$full_path"
 		cd "$dir$full_path" # ~/smp-note/YYYY/MM/
 	       	
 		# file creation
