@@ -88,16 +88,28 @@ import mistletoe
 # Function to convert markdown to html using markdown 
 def converter(infile, outfile):
     # flexible adding of markdown->html into an existing file
-    with open(infile, 'r') as f:
-        rendered = mistletoe.markdown(f)
-    with open(outfile, 'w') as f:
-        f.write(preq)
-        f.write(rendered)
-        f.write(subq)
+    try:
+        with open(infile, 'r') as f:
+            rendered = mistletoe.markdown(f)
+    except FileNotFoundError:
+        print("Please use absolute or full paths when parsing notes")
+        print("We couldnt find the input file you wanted to use!")
+    try:
+        with open(outfile, 'w') as f:
+            f.write(preq)
+            f.write(rendered)
+            f.write(subq)
+    except FileNotFoundError:
+        print("Please use absolute or full paths when parsing notes")
+        print("We couldnt find the output file you wanted to use!")
 
 def create_stylesheet(infile, outfile, stylefile):
-    with open(stylefile, 'w') as f:
-        f.write(style)
+    try:
+        with open(stylefile, 'w') as f:
+            f.write(style)
+    except FileNotFoundError:
+        print("Please use absolute or full paths when parsing notes")
+        print("We couldnt create the stylesheet!")
 
 def main(argv):
     infile=""
