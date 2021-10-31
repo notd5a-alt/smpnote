@@ -94,6 +94,7 @@ def converter(infile, outfile):
     except FileNotFoundError:
         print("Please use absolute or full paths when parsing notes")
         print("We couldnt find the input file you wanted to use!")
+        sys.exit(1)
     try:
         with open(outfile, 'w') as f:
             f.write(preq)
@@ -102,6 +103,7 @@ def converter(infile, outfile):
     except FileNotFoundError:
         print("Please use absolute or full paths when parsing notes")
         print("We couldnt find the output file you wanted to use!")
+        sys.exit(1)
 
 def create_stylesheet(infile, outfile, stylefile):
     try:
@@ -110,6 +112,7 @@ def create_stylesheet(infile, outfile, stylefile):
     except FileNotFoundError:
         print("Please use absolute or full paths when parsing notes")
         print("We couldnt create the stylesheet!")
+        sys.exit(1)
 
 def main(argv):
     infile=""
